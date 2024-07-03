@@ -6,6 +6,12 @@ Primero, instale las depencencias
 npm install
 ```
 
+Copie el archivo .env.example y agregue su key de TwelveData
+```
+NEXT_PUBLIC_TWELVEDATA_API_KEY=XXXXXX
+```
+
+
 Luego, para correr el proyecto en modo desarrollo
 
 ```bash
