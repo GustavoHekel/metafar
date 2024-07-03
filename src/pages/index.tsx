@@ -5,6 +5,7 @@ import Table from "@/components/Table/Table";
 import {Box, TextField} from "@mui/material";
 import {ChangeEvent, useState} from "react";
 import {Stock} from "@/interfaces";
+import {Countries} from "@/constants/countries";
 
 const Index: NextPage<GetStocksResponse> = ({data}) => {
 
@@ -47,7 +48,7 @@ export default Index
 
 export const getStaticProps = async () => {
 
-    const response = await fetch('https://api.twelvedata.com/stocks?country=USA')
+    const response = await fetch('https://api.twelvedata.com/stocks?country=' + Countries.US)
 
     if (!response.ok) {
         throw new Error('Invalid data')

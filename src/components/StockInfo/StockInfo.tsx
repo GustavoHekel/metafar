@@ -8,15 +8,16 @@ const StockInfo: FC<{stock: Stock}> = ({stock}) => {
             sx={{
                 display: 'flex',
                 flexDirection: 'row',
+                justifyContent: 'space-around',
                 gap: 2
             }}
         >
-            <Typography variant={"caption"}>Symbol: {stock.symbol}</Typography>
-            <Typography variant={"caption"}>Name: {stock.name}</Typography>
-            <Typography variant={"caption"}>Currency: {stock.currency}</Typography>
-            <Typography variant={"caption"}>Exchange: {stock.exchange}</Typography>
-            <Typography variant={"caption"}>Country: {stock.country}</Typography>
-            <Typography variant={"caption"}>Type: {stock.type}</Typography>
+            <Typography variant={"caption"}>{stock.symbol}</Typography>
+            <Typography variant={"caption"}>{stock.name}</Typography>
+            <Typography variant={"caption"}>{stock.currency}</Typography>
+            <Typography variant={"caption"}>{stock.exchange}</Typography>
+            <Typography variant={"caption"}>{stock.country}</Typography>
+            <Typography variant={"caption"}>{stock.type}</Typography>
         </Box>
     )
 }

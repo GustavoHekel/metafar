@@ -49,7 +49,7 @@ export const useGetTimeSeries = () => {
 
                 setRequest(prev => ({
                     ...prev,
-                    data: res.values.map((val: {open: string}) => Number(val.open))
+                    data: res.values.map((val: {open: string}) => Number(val.open)).reverse()
                 }))
 
             })

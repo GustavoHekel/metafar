@@ -9,6 +9,7 @@ import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
 import moment, {Moment} from "moment";
 import {useGetTimeSeries} from "@/hooks/useGetTimeSeries";
 import Chart from "@/components/ChartContainer/Chart";
+import {Countries} from "@/constants/countries";
 
 interface ChartContainerInterface {
     symbol: string
@@ -19,7 +20,6 @@ const dateTimeFormat = 'YYYY-MM-DD HH:mm:ss'
 const ChartContainer: FC<ChartContainerInterface> = ({symbol}) => {
 
     const intervalRef = useRef<NodeJS.Timeout>()
-    const realTimeInitialRef = useRef<Moment>(moment())
 
     const [getTimeSeries, {data, loading, error}] = useGetTimeSeries()
 
@@ -36,11 +36,11 @@ const ChartContainer: FC<ChartContainerInterface> = ({symbol}) => {
 
             intervalRef.current = setInterval(() => {
 
-                const startDate = realTimeInitialRef.current.format(dateTimeFormat)
-                const endDate = realTimeInitialRef.current.add(form.interval, 'minutes').format(dateTimeFormat)
+                const startDate = moment().startOf('day').format(dateTimeFormat)
+                const endDate = moment().format(dateTimeFormat)
 
                 getTimeSeries({
-                    country: 'US',
+                    country: Countries.US,
                     symbol: symbol,
                     startDate: startDate,
                     endDate: endDate,
@@ -91,8 +91,8 @@ const ChartContainer: FC<ChartContainerInterface> = ({symbol}) => {
         let startDate
 
         if (form.periodicity === ChartOptions.REAL_TIME) {
+            startDate = moment().startOf('day').format(dateTimeFormat)
             endDate = moment().format(dateTimeFormat)
-            startDate = moment().subtract(form.interval, 'minutes').format(dateTimeFormat)
         } else {
             endDate = form.dateTo.format(dateTimeFormat)
             startDate = form.dateFrom.format(dateTimeFormat)
@@ -100,7 +100,7 @@ const ChartContainer: FC<ChartContainerInterface> = ({symbol}) => {
 
         if (startDate && endDate && form.interval) {
             getTimeSeries({
-                country: 'US',
+                country: Countries.US,
                 symbol: symbol,
                 startDate: startDate,
                 endDate: endDate,
